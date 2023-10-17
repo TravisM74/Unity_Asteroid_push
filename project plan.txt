@@ -1,0 +1,4 @@
+I will attempt to remake the classic game Asteroids in unity as my solo project.
+
+I will attempt to enhance the game with additional enemies and weapon types.
+With potentially ore collecting from destroyed asteroids.
