@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6541553103024875151}
   - component: {fileID: 2876575548181933249}
+  - component: {fileID: 5511609535807516156}
+  - component: {fileID: 9042708059633609347}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -84,3 +86,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5511609535807516156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6030782038868703637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 532cecc37b0f13141a1349a2f3284fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroidPrefab: {fileID: 0}
+  timeBetweenAsteroids: 10
+  timeBetweenHostiles: 25
+--- !u!114 &9042708059633609347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6030782038868703637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81a077caebbd4a4e82a27fd5325aabf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hotsilePrefab: {fileID: 0}
+  hostile: {fileID: 0}
+  timeBetweenHostiles: 25
