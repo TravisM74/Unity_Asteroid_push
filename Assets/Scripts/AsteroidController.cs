@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour
@@ -24,9 +25,9 @@ public class AsteroidController : MonoBehaviour
     void Update()
     {
         TimedEvents();
+        RotationUpdate();
 
     }
-
     private void Awake() {
         asteroidTimer = gameObject.AddComponent<Timer>();
         hostileTimer = gameObject.AddComponent<Timer>();
@@ -58,6 +59,18 @@ public class AsteroidController : MonoBehaviour
         Vector3 position = new Vector3(Random.Range(5f, -5f), Random.Range(5f, -5f), 0);
         asteroid = Instantiate(asteroidPrefab, position, Quaternion.identity, transform);
         asteroids.Add(asteroid);
+    }
+
+    private void RotationUpdate() {
+       foreach(GameObject asteroid in asteroids) {
+            RotateAsteroid(asteroid);
+        }
+       
+    }
+
+
+    private void RotateAsteroid(GameObject asteroid) {
+        asteroid.transform.Rotate(0.1f, 0.1f, 0.1f);
     }
 
     private void CreateHostile() {
