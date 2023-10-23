@@ -3,7 +3,9 @@ guid: 532cecc37b0f13141a1349a2f3284fa8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - board: {fileID: 6030782038868703637, guid: 2cce6e0dec1475947bd7da93f7990c43, type: 3}
+  - asteroidPrefab: {fileID: 3231004154433448633, guid: b1e7bfc8b36083e439936abb17595c82, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

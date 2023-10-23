@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour
@@ -9,15 +10,19 @@ public class AsteroidController : MonoBehaviour
     private Timer asteroidTimer;
     private Timer hostileTimer;
     private GameObject asteroid;
+    [SerializeField] private GameObject playBoard;
     public GameObject asteroidPrefab;
     private List<GameObject> asteroids = new List<GameObject>();
     public float timeBetweenAsteroids = 10.0f;
     public float timeBetweenHostiles = 25.0f;
 
+ 
+
 
     // Start is called before the first frame update
     void Start()
     {
+     
         CreateAsteroid();
     }
 
@@ -30,15 +35,14 @@ public class AsteroidController : MonoBehaviour
     }
     private void Awake() {
         asteroidTimer = gameObject.AddComponent<Timer>();
-        hostileTimer = gameObject.AddComponent<Timer>();
+     
         SetTimer();
     }
 
     private void SetTimer() {
         asteroidTimer.Set(timeBetweenAsteroids);
         asteroidTimer.Run();
-        hostileTimer.Set(timeBetweenHostiles);
-        hostileTimer.Run(); 
+       
     }
 
     private void TimedEvents() {
@@ -46,17 +50,14 @@ public class AsteroidController : MonoBehaviour
             CreateAsteroid();
             SetTimer();
         }
-        if (hostileTimer.IsCompleted) {
-            CreateHostile();
-            SetTimer();
-        }
+      
     }
 
 
     private void CreateAsteroid() {
         Debug.Log("Create asteroid");
 
-        Vector3 position = new Vector3(Random.Range(5f, -5f), Random.Range(5f, -5f), 0);
+        Vector3 position = new Vector3(Random.Range(8f, -8f), Random.Range(4.5f, -4.5f), 0);
         asteroid = Instantiate(asteroidPrefab, position, Quaternion.identity, transform);
         asteroids.Add(asteroid);
     }
@@ -70,11 +71,7 @@ public class AsteroidController : MonoBehaviour
 
 
     private void RotateAsteroid(GameObject asteroid) {
-        asteroid.transform.Rotate(0.1f, 0.1f, 0.1f);
-    }
-
-    private void CreateHostile() {
-        Debug.Log("create Hostile");
+        asteroid.transform.Rotate(0, 0, 0.1f);
     }
 
 }
