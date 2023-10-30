@@ -8,15 +8,23 @@ public class PlayerController : MonoBehaviour
 {
 
     private float shipRotation = 0f;
-
+    public  float fuel {
+        get;
+        set;   
+    } 
+    private float idleConsumption = 0.1f;
     private float thrust = 0;
-    [SerializeField] private float thrustPower = 1000f;
-    [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private GameObject playBoard;
-    private float topBoarder = 8f;
-    private float bottomBorder = -8f;
-    private float leftBoarder = -4.5f;
-    private float rightBoarder = 4.5f;
+    private float thrustPower = 10000f;
+    private float rotationPower = 150f;
+    public bool gameOver { 
+        get;
+        private set;
+    }
+
+    // roataion speed usind in original turning method
+    // private float rotationSpeed = 5f;
+    private GameObject playBoard;
+  
 
   
     private Rigidbody2D rb2D;
@@ -28,63 +36,52 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Setup();
+        fuel = 500;
     }
-
+    public void Reset() {
+        fuel = 500;
+    }
     // Update is called once per frame
     void Update() {
         ReadInput();
         MovementControl();
-        BoarderBoundsCheck();
+        FuelLevel();
 
     }
 
-    private void Setup() {
-
-        float height = playBoard.transform.localScale.y;
-        float width = playBoard.transform.localScale.x;
-        Debug.Log(height+ " : " +width);
-        topBoarder = 8f;
-        bottomBorder = -8f;
-        leftBoarder = -4.5f;
-        rightBoarder = 4.5f;
-
-}
-
-    private void BoarderBoundsCheck() {
-        float x = transform.position.x; 
-        float y = transform.position.y;
-
-        if (x > topBoarder) {
-            transform.position = new Vector2(bottomBorder, y);
-        }
-        if (x < bottomBorder) {
-            transform.position = new Vector2(topBoarder, y);
-        }
-        if (y > rightBoarder) {
-            transform.position = new Vector2(x, leftBoarder);
-        }
-        if (y < leftBoarder) {
-            transform.position = new Vector2(x, rightBoarder);
+    private void FuelLevel() {
+        Debug.Log(fuel);
+        if (fuel < 0) {
+            gameOver = true;
+            GameManager.Instance.Go(GameStateBase.Type.GameOver);
         }
     }
+
 
     private void MovementControl() {
 
         if (thrust > 0) {
-            rb2D.AddForce(transform.right * thrust * thrustPower * 2);
+            rb2D.AddForce(transform.right *  thrustPower * 2 * Time.deltaTime);
+            fuel -= thrust  * 2 * Time.deltaTime;
         }
         if (thrust < 0) {
-            rb2D.AddForce(transform.right * thrust * thrustPower);
+            rb2D.AddForce(transform.right * thrust * thrustPower * Time.deltaTime);
+            fuel += thrust  * Time.deltaTime;
 
         }
+        fuel -= idleConsumption * Time.deltaTime;
         //Debug.Log(thrust);
-        rb2D.rotation -= shipRotation * rotationSpeed * Time.deltaTime;
+        // rb2D.rotation -= shipRotation * rotationSpeed * Time.deltaTime;
+       
+        float rotationalThrust = -shipRotation * rotationPower * Time.deltaTime;
+        //Debug.Log(rotationalThrust);
+        // converted to torque on rigid body rotation
+        rb2D.AddTorque(rotationalThrust, ForceMode2D.Impulse);
     }
 
     private void ReadInput() {
         // Read input from player
-        shipRotation += Input.GetAxis("Horizontal");
+        shipRotation = Input.GetAxis("Horizontal");
           
         thrust = Input.GetAxis("Vertical");
            

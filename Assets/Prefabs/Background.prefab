@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532cecc37b0f13141a1349a2f3284fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidPrefab: {fileID: 6542101368399430838, guid: 5c3659959ebb30a489d7eef3009f8afc, type: 3}
+  playBoard: {fileID: 6030782038868703637}
+  asteroidPrefab: {fileID: 3231004154433448633, guid: b1e7bfc8b36083e439936abb17595c82, type: 3}
   timeBetweenAsteroids: 10
   timeBetweenHostiles: 25
 --- !u!114 &9042708059633609347

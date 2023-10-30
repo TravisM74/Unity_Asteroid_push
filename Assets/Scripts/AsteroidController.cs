@@ -8,7 +8,6 @@ public class AsteroidController : MonoBehaviour
 {
 
     private Timer asteroidTimer;
-    private Timer hostileTimer;
     private GameObject asteroid;
     [SerializeField] private GameObject playBoard;
     public GameObject asteroidPrefab;
@@ -16,27 +15,55 @@ public class AsteroidController : MonoBehaviour
     public float timeBetweenAsteroids = 10.0f;
     public float timeBetweenHostiles = 25.0f;
 
+    private float spawnRangeX = 7f;
+    private float spawnRangeY = 3f;
+    public GameObject capturePoint;
+    private float xBound = 0.5f;
+    private float yBound = 0.5f;
+    public int numberOfAsteroids = 1;
+
+    public int score { get;
+            set; } 
+
+    
+
  
 
 
     // Start is called before the first frame update
     void Start()
     {
-     
+        score = 0;
         CreateAsteroid();
     }
 
     // Update is called once per frame
     void Update()
     {
-        TimedEvents();
-        RotationUpdate();
+        // TimedEvents();
+        CheckAsteroidCapture();
+
+
+        if (asteroids.Count == 0){
+            // TODO Next Wave Window Scene added 
+
+            numberOfAsteroids++;
+            for (int i = 0; i < numberOfAsteroids; i++){
+                CreateAsteroid();
+            }
+        }
 
     }
     private void Awake() {
         asteroidTimer = gameObject.AddComponent<Timer>();
      
         SetTimer();
+    }
+
+    public void Reset(){
+        asteroids.Clear();
+        numberOfAsteroids = 1;
+        score = 0;
     }
 
     private void SetTimer() {
@@ -57,21 +84,27 @@ public class AsteroidController : MonoBehaviour
     private void CreateAsteroid() {
         Debug.Log("Create asteroid");
 
-        Vector3 position = new Vector3(Random.Range(8f, -8f), Random.Range(4.5f, -4.5f), 0);
+        Vector3 position = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), Random.Range(-spawnRangeY, spawnRangeY), 0);
         asteroid = Instantiate(asteroidPrefab, position, Quaternion.identity, transform);
         asteroids.Add(asteroid);
     }
 
-    private void RotationUpdate() {
-       foreach(GameObject asteroid in asteroids) {
-            RotateAsteroid(asteroid);
+    private void CheckAsteroidCapture(){
+        foreach (GameObject asteroid in asteroids){
+            float x = asteroid.transform.position.x;
+            float y = asteroid.transform.position.y;
+            if (x > -xBound && x < xBound && y > -yBound && y < yBound){
+                asteroids.Remove(asteroid);
+                Debug.Log("Remove asteroid from list ");
+
+                Destroy(asteroid);
+                Debug.Log("Destroy asteroid Object");
+                score++;
+
+            } 
         }
-       
+        
     }
 
-
-    private void RotateAsteroid(GameObject asteroid) {
-        asteroid.transform.Rotate(0, 0, 0.1f);
-    }
 
 }

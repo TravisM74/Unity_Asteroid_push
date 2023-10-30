@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 763454669791954475}
   - component: {fileID: 4448889872123755484}
   - component: {fileID: 5374312298899837914}
+  - component: {fileID: -6284287153151889049}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -144,9 +145,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 0.05
+  m_Mass: 1000
+  m_LinearDrag: 0
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -203,12 +204,24 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5046096}
-      - {x: -0.3243127, y: -0.15634969}
-      - {x: -0.36636072, y: -0.42246246}
-      - {x: 0.38137272, y: -0.41870928}
+    - - {x: 0.5003742, y: 0.2648468}
+      - {x: -0.4702552, y: 0.39614663}
+      - {x: -0.44975635, y: -0.3911891}
+      - {x: 0.44391948, y: -0.32488906}
       - {x: 0.30554783, y: -0.04000789}
   m_UseDelaunayMesh: 0
+--- !u!114 &-6284287153151889049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2878365687484658553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaaa901092cea634d8eb2810ecbab4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1660478611017809410
 PrefabInstance:
   m_ObjectHideFlags: 0
